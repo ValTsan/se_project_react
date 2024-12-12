@@ -3,7 +3,7 @@ import "./Header.css";
 import headerLogo from "../../assets/logo.svg";
 import headerAvatar from "../../assets/Avatar.png";
 
-function Header({ handleAddClick }) {
+function Header({ handleAddClick, weatherData }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -14,7 +14,9 @@ function Header({ handleAddClick }) {
   return (
     <header className="header">
       <img src={headerLogo} alt="Header Logo" className="header__logo" />
-      <p className="header__date">{currentDate}</p>
+      <p className="header__date">
+        {currentDate}, {weatherData.city}
+      </p>
       <button
         onClick={handleAddClick}
         type="button"
