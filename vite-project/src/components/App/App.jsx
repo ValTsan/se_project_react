@@ -6,7 +6,7 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
-import { getWeather, processWeatherData } from "../../utils/weatherApi";
+import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -36,7 +36,7 @@ function App() {
   useEffect(() => {
     getWeather(coordinates, APIKey)
       .then((data) => {
-        const processedData = processWeatherData(data);
+        const processedData = filterWeatherData(data);
         setWeatherData(processedData);
       })
       .catch(console.error);

@@ -10,7 +10,7 @@ export const getWeather = ({ latitude, longitude }, APIKey) => {
   });
 };
 
-export const processWeatherData = (data) => {
+export const filterWeatherData = (data) => {
   const result = {};
   result.city = data.name;
   result.temp = { F: data.main.temp };
