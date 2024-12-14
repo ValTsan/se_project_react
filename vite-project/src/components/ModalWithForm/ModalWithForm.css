@@ -56,12 +56,18 @@
 .modal__form {
   display: flex;
   flex-direction: column;
-  width: 100%;
+}
+
+.modal__label {
+  padding-bottom: 24px;
 }
 
 .modal__input {
   display: block;
   border: none;
+  border-bottom: 1px solid #000000;
+  width: 100%;
+  padding-top: 8px;
 }
 
 .modal__radio-button {
