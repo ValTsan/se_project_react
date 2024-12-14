@@ -3,21 +3,21 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url(../vendor/fonts/CabinetGrotesk-Bold.otf) format("woff2");
+  src: url(../vendor/fonts/CabinetGrotesk-Bold.otf) format("opentype");
 }
 
 @font-face {
   font-family: "Cabinet Grotesk";
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   font-display: swap;
-  src: url(../vendor/fonts/CabinetGrotesk-Medium.otf) format("woff2");
+  src: url(../vendor/fonts/CabinetGrotesk-Medium.otf) format("opentype");
 }
 
 @font-face {
   font-family: "Cabinet Grotesk";
   font-style: normal;
-  font-weight: 700;
+  font-weight: 900;
   font-display: swap;
-  src: url(../vendor/fonts/CabinetGrotesk-Extrabold.otf) format("woff2");
+  src: url(../vendor/fonts/CabinetGrotesk-Extrabold.otf) format("opentype");
 }

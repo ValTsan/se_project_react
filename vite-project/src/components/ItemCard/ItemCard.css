@@ -17,7 +17,9 @@
   border-radius: 4px;
   line-height: 20px;
   font-size: 16px;
+  font-weight: 500;
   width: auto;
+  padding: 2px 12px;
   height: 24px;
   text-align-last: center;
 }
@@ -28,4 +30,7 @@
 
 .cards__text {
   font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.8px;
 }
