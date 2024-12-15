@@ -113,4 +113,16 @@
   height: 610px;
   width: 100%;
   overflow: hidden;
+  padding: 0;
+}
+
+.modal__image {
+  width: 100%;
+}
+
+.modal__caption {
+  margin: 20px 0 12px 32px;
+}
+
+.modal__weather {
 }
