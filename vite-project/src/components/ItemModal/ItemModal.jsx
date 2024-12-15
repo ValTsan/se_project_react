@@ -8,9 +8,7 @@ function ItemModal({ activeModal, handleCloseClick, card }) {
           onClick={handleCloseClick}
           type="button"
           className="modal__close"
-        >
-          CLOSE
-        </button>
+        ></button>
         <img src={card.link} alt="Clothes" className="modal__image" />
         <div className="modal__footer">
           <h2 className="modal__caption">{card.name}</h2>
