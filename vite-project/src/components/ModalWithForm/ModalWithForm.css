@@ -118,11 +118,30 @@
 
 .modal__image {
   width: 100%;
+  margin: 0;
+  padding: 0;
+  display: block;
 }
 
 .modal__caption {
-  margin: 20px 0 12px 32px;
+  padding: 20px 0 0 0;
+  margin: 0 0 0 32px;
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
 }
 
 .modal__weather {
+  padding: 12px 0 32px 0;
+  margin: 0 0 0 32px;
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.modal__footer {
+  width: 498px;
+  height: 112px;
 }
