@@ -34,7 +34,7 @@
   background-repeat: no-repeat;
   background-size: contain;
   border: none;
-  background-color: transparent;
+  background-color: currentColor;
   cursor: pointer;
   position: absolute;
 }
