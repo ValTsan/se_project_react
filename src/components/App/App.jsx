@@ -26,7 +26,7 @@ function App() {
 
   const handleAddClick = () => {
     console.log("Add button clicked");
-    setActiveModal("add-gament");
+    setActiveModal("add-garment");
   };
 
   const closeActiveModal = () => {
@@ -53,7 +53,7 @@ function App() {
       <ModalWithForm
         title="New Garment"
         buttonText="Add Garment"
-        activeModal={activeModal}
+        isOpen={activeModal === "add-garment"}
         handleCloseClick={closeActiveModal}
       >
         <label htmlFor="name" className="modal__label">
