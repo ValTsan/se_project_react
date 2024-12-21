@@ -1,4 +1,3 @@
-//import React from "react";
 import "./Header.css";
 import headerLogo from "../../assets/logo.svg";
 import headerAvatar from "../../assets/Avatar.png";
@@ -8,7 +7,7 @@ function Header({ handleAddClick, weatherData }) {
     month: "long",
     day: "numeric",
   });
-  //const location = info ? info.location : null;
+
   const userName = "Terence Tegegne";
 
   return (
