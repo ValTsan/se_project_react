@@ -13,7 +13,7 @@ const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
     <ModalWithForm
       title="New Garment"
       buttonText="Add Garment"
-      isOpen={activeModal === "add-garment"}
+      isOpen={isOpen}
       handleCloseClick={closeActiveModal}
     >
       <label htmlFor="name" className="modal__label">

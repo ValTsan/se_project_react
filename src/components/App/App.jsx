@@ -48,6 +48,10 @@ function App() {
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
+  const onAddItem = (e) => {
+    console.log(e);
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIKey)
       .then((data) => {
@@ -74,12 +78,26 @@ function App() {
           />
           <Footer />
         </div>
-        <AddItemModal activeModal={activeModal}></AddItemModal>
+        {activeModal === "add-garment" && (
+          <AddItemModal
+            handleCloseClick={closeActiveModal}
+            isOpen={activeModal === "add-garment"}
+          />
+        )}
+        {activeModal === "preview" && (
+          <ItemModal
+            activeModal={activeModal}
+            card={selectedCard}
+            handleCloseClick={closeActiveModal}
+          />
+        )}
+
+        {/* <AddItemModal activeModal={activeModal}></AddItemModal>
         <ItemModal
           activeModal={activeModal}
           card={selectedCard}
           handleCloseClick={closeActiveModal}
-        />
+        /> */}
       </CurrentTemperatureUnitContext.Provider>
     </div>
   );
