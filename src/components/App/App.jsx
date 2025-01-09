@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
-import { getWeather, filterWeatherData } from "../../utils/weatherApi";
+import {
+  getWeather,
+  getWeatherType,
+  filterWeatherData,
+} from "../../utils/weatherApi";
 import { coordinates, APIKey } from "../../utils/constants";
 import Footer from "../Footer/Footer";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+//import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -19,6 +23,8 @@ function App() {
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+  const [temp, setTemp] = useState(0);
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
   const handleCardClick = (card) => {
     console.log("Button card clicked!");
@@ -37,28 +43,34 @@ function App() {
   };
 
   const handleToggleSwitchChange = () => {
-    currentTemperatureUnit === "F"
-      ? setCurrentTemperatureUnit("C")
-      : setCurrentTemperatureUnit("F");
+    if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
+    if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
   useEffect(() => {
     getWeather(coordinates, APIKey)
       .then((data) => {
         const processedData = filterWeatherData(data);
+        console.log(processedData);
         setWeatherData(processedData);
       })
       .catch(console.error);
   }, []);
 
+  console.log(currentTemperatureUnit);
+
   return (
     <div className="page">
       <CurrentTemperatureUnitContext.Provider
-        value={{ handleToggleSwitchChange }}
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-          <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+          <Main
+            weatherData={weatherData}
+            handleCardClick={handleCardClick}
+            weatherTemp={temp}
+          />
           <Footer />
         </div>
         <ModalWithForm
