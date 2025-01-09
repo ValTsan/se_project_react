@@ -3,7 +3,6 @@ import "./App.css";
 
 import Header from "../Header/Header";
 import Main from "../Main/Main";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import {
   getWeather,
@@ -12,7 +11,6 @@ import {
 } from "../../utils/weatherApi";
 import { coordinates, APIKey } from "../../utils/constants";
 import Footer from "../Footer/Footer";
-//import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../../AddItemModal/AddItemModal";
 
@@ -80,8 +78,9 @@ function App() {
         </div>
         {activeModal === "add-garment" && (
           <AddItemModal
-            handleCloseClick={closeActiveModal}
             isOpen={activeModal === "add-garment"}
+            handleCloseClick={closeActiveModal}
+            onAddItem={onAddItem}
           />
         )}
         {activeModal === "preview" && (
