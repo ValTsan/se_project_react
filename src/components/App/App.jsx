@@ -47,7 +47,9 @@ function App() {
   };
 
   const onAddItem = (e) => {
+    e.preventDefault();
     console.log(e);
+    // console.log(e.target);
   };
 
   useEffect(() => {
@@ -90,13 +92,6 @@ function App() {
             handleCloseClick={closeActiveModal}
           />
         )}
-
-        {/* <AddItemModal activeModal={activeModal}></AddItemModal>
-        <ItemModal
-          activeModal={activeModal}
-          card={selectedCard}
-          handleCloseClick={closeActiveModal}
-        /> */}
       </CurrentTemperatureUnitContext.Provider>
     </div>
   );
