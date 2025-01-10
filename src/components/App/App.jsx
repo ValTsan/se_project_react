@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
 import Header from "../Header/Header";
@@ -69,11 +70,21 @@ function App() {
       >
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-          <Main
-            weatherData={weatherData}
-            handleCardClick={handleCardClick}
-            weatherTemp={temp}
-          />
+
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                  weatherTemp={temp}
+                />
+              }
+            />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+
           <Footer />
         </div>
         {activeModal === "add-garment" && (
