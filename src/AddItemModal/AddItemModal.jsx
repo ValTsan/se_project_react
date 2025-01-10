@@ -9,13 +9,24 @@ const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
     setName(e.target.value);
   };
 
+  const [imageUrl, setUrl] = useState("");
+  const handleUrlChange = (e) => {
+    console.log(e.target.value);
+    setUrl(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddItem({ name, imageUrl });
+  };
+
   return (
     <ModalWithForm
       title="New Garment"
       buttonText="Add Garment"
       handleCloseClick={handleCloseClick}
       isOpen={isOpen}
-      onSubmit={() => onAddItem({ name })}
+      onSubmit={handleSubmit}
     >
       <label htmlFor="name" className="modal__label">
         Name
@@ -35,6 +46,8 @@ const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
           className="modal__input"
           id="imageUrl"
           placeholder="Image URL"
+          value={imageUrl}
+          onChange={handleUrlChange}
         />
       </label>
       <fieldset className="modal__radio-button">
@@ -45,6 +58,7 @@ const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
             type="radio"
             name="radio__buttons"
             className="modal__radio-input"
+            value="hot"
           />
           Hot
         </label>
@@ -54,6 +68,7 @@ const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
             type="radio"
             name="radio__buttons"
             className="modal__radio-input"
+            value="warm"
           />
           Warm
         </label>
@@ -63,6 +78,7 @@ const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
             type="radio"
             name="radio__buttons"
             className="modal__radio-input"
+            value="cold"
           />
           Cold
         </label>
