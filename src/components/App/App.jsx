@@ -5,6 +5,7 @@ import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import ItemModal from "../ItemModal/ItemModal";
+import Profile from "../Profile/Profile";
 import {
   getWeather,
   getWeatherType,
