@@ -1,0 +1,14 @@
+.profile {
+  display: flex;
+  gap: 116px;
+}
+
+.profile__sidebar {
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.8px;
+}
+
+/* .profile__clothing-items {
+} */
