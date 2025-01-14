@@ -1,6 +1,6 @@
-/* .toggle-switch {
-  margin-left: auto;
-} */
+.toggle-switch {
+  display: flex;
+}
 
 .toggle-switch__label {
   display: flex;
