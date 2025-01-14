@@ -1,10 +1,11 @@
-.toggle-switch {
+/* .toggle-switch {
   margin-left: auto;
-}
+} */
 
 .toggle-switch__label {
   display: flex;
   position: relative;
+  margin-left: 280px;
 }
 
 .toggle-switch__checkbox {
