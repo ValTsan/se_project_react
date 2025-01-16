@@ -27,7 +27,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [temp, setTemp] = useState(0);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-  const [clothingItems, setClothingItems] = useState({});
+  const [clothingItems, setClothingItems] = useState([]);
 
   const handleCardClick = (card) => {
     console.log("Button card clicked!");
@@ -65,7 +65,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getItems(clothingItems)
+    getItems()
       .then((data) => {
         console.log(data);
         setClothingItems(data);
