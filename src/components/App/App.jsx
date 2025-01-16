@@ -15,6 +15,7 @@ import { coordinates, APIKey } from "../../utils/constants";
 import Footer from "../Footer/Footer";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../../AddItemModal/AddItemModal";
+import { getItems } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -26,6 +27,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [temp, setTemp] = useState(0);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [clothingItems, setClothingItems] = useState({});
 
   const handleCardClick = (card) => {
     console.log("Button card clicked!");
@@ -62,7 +64,14 @@ function App() {
       .catch(console.error);
   }, []);
 
-  console.log(currentTemperatureUnit);
+  useEffect(() => {
+    getItems(clothingItems)
+      .then((data) => {
+        console.log(data);
+        setClothingItems(data);
+      })
+      .catch(console.error);
+  }, []);
 
   return (
     <div className="page">
@@ -80,6 +89,7 @@ function App() {
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
                   weatherTemp={temp}
+                  clothingItems={clothingItems}
                 />
               }
             />
