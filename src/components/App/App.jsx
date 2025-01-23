@@ -54,6 +54,25 @@ function App() {
     console.log(values);
   };
 
+  const handleAddItemSubmit = (item) => {
+    api
+      .additem(item)
+      .then((newItem) => {
+        setClothingItems([newItem, ...clothingItems]);
+        closeActiveModal();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleCardDelete = (card) => {
+    api
+      .removeItem(card.id)
+      .then(() => {
+        setClothingItems((cards) => cards.filter((c) => c.id !== card.id));
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIKey)
       .then((data) => {
@@ -90,12 +109,19 @@ function App() {
                   handleCardClick={handleCardClick}
                   weatherTemp={temp}
                   clothingItems={clothingItems}
+                  handleCardDelete={handleCardDelete}
                 />
               }
             />
             <Route
               path="/profile"
-              element={<Profile onCardClick={handleCardClick} />}
+              element={
+                <Profile
+                  onCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                  handleCardDelete={handleCardDelete}
+                />
+              }
             />
           </Routes>
 

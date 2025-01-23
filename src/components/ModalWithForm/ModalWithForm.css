@@ -132,6 +132,13 @@
   line-height: 24px;
 }
 
+.modal__delete {
+  display: flex;
+  border: none;
+  color: red;
+  background-color: white;
+}
+
 .modal__weather {
   padding: 12px 0 32px 0;
   margin: 0 0 0 32px;
