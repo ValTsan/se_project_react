@@ -53,12 +53,15 @@ function App() {
   const onAddItem = (values) => {
     console.log(values);
   };
+  // const additem = () => {
+  //   setActiveModal("add-garment");
+  // };
 
   const handleAddItemSubmit = (item) => {
-    api
-      .additem(item)
+    return onAddItem(item)
       .then((newItem) => {
-        setClothingItems([newItem, ...clothingItems]);
+        console.log("New Item Added:", newItem);
+        setClothingItems((clothingItems) => [newItem, ...clothingItems]);
         closeActiveModal();
       })
       .catch((err) => console.log(err));
@@ -131,7 +134,7 @@ function App() {
           <AddItemModal
             isOpen={activeModal === "add-garment"}
             handleCloseClick={closeActiveModal}
-            onAddItem={onAddItem}
+            onAddItem={handleAddItemSubmit}
           />
         )}
         {activeModal === "preview" && (
