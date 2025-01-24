@@ -67,12 +67,27 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const handleCardDelete = (card) => {
-    return deleteItem(card.id)
+  // const handleCardDelete = (id) => {
+  //   console.log("Deleting item with id:", id);
+  //   return deleteItem(id)
+  //     .then(() => {
+  //       setClothingItems((clothingItems) =>
+  //         clothingItems.filter((item) => item._id !== id)
+  //       );
+  //       closeActiveModal();
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+
+  const handleCardDelete = (id) => {
+    console.log("Deleting item with id:", id);
+    return deleteItem(id)
       .then(() => {
-        setClothingItems((cards) => cards.filter((c) => c.id !== card.id));
+        setClothingItems((cards) => cards.filter((c) => c.id !== id));
+        closeActiveModal();
       })
-      .catch((err) => console.log(err));
+
+      .catch((err) => console.log("Error deleting item:", err));
   };
 
   useEffect(() => {
@@ -155,6 +170,7 @@ function App() {
             activeModal={activeModal}
             card={selectedCard}
             handleCloseClick={closeActiveModal}
+            onClick={handleCardDelete}
           />
         )}
       </CurrentTemperatureUnitContext.Provider>
