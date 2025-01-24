@@ -15,7 +15,7 @@ import { coordinates, APIKey } from "../../utils/constants";
 import Footer from "../Footer/Footer";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../../AddItemModal/AddItemModal";
-import { getItems } from "../../utils/api";
+import { getItems, addItem, deleteItem } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -58,8 +58,7 @@ function App() {
   // };
 
   const handleAddItemSubmit = (item) => {
-    api
-      .addItem(item)
+    return addItem(item)
       .then((newItem) => {
         console.log("New Item Added:", newItem);
         setClothingItems((clothingItems) => [newItem, ...clothingItems]);
@@ -69,8 +68,7 @@ function App() {
   };
 
   const handleCardDelete = (card) => {
-    api
-      .removeItem(card.id)
+    return deleteItem(card.id)
       .then(() => {
         setClothingItems((cards) => cards.filter((c) => c.id !== card.id));
       })
@@ -135,7 +133,7 @@ function App() {
           <AddItemModal
             isOpen={activeModal === "add-garment"}
             handleCloseClick={closeActiveModal}
-            onAddItem={handleAddItemSubmit}
+            handleAddItemSubmit={handleAddItemSubmit}
           />
         )}
         {activeModal === "preview" && (
