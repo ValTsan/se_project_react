@@ -53,12 +53,13 @@ function App() {
   const onAddItem = (values) => {
     console.log(values);
   };
-  // const additem = () => {
+  // const addItem = () => {
   //   setActiveModal("add-garment");
   // };
 
   const handleAddItemSubmit = (item) => {
-    return onAddItem(item)
+    api
+      .addItem(item)
       .then((newItem) => {
         console.log("New Item Added:", newItem);
         setClothingItems((clothingItems) => [newItem, ...clothingItems]);
