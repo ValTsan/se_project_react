@@ -133,10 +133,17 @@
 }
 
 .modal__delete {
-  display: flex;
+  position: absolute;
+  bottom: 68px;
+  right: 32px;
+  background-color: #fff;
+  color: #ff4d00;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
   border: none;
-  color: red;
-  background-color: white;
+  margin: 0;
+  padding: 0;
 }
 
 .modal__weather {
