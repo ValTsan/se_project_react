@@ -35,7 +35,6 @@
 }
 
 .header__add-clothes-btn {
-  /* margin-left: auto; */
   font-family: "Cabinet Grotesk";
   font-size: 20px;
   font-weight: 700;
@@ -66,13 +65,3 @@
   text-decoration: none;
   color: black;
 }
-
-/* @media screen and (min-width: 768px) {
-  .header {
-    height: 44px;
-    margin-bottom: 28px;
-  }
-}
-
-.header__container {
-} */

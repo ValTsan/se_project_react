@@ -5,7 +5,7 @@ function ItemModal({ activeModal, handleCloseClick, card, onClick }) {
   console.log("Card received in modal:", card);
   if (!activeModal || !card) {
     console.error("Modal is inactive or no card provided");
-    return null; // Don't render if inactive or no card is passed
+    return null;
   }
 
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);

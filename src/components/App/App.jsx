@@ -50,13 +50,6 @@ function App() {
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
-  const onAddItem = (values) => {
-    console.log(values);
-  };
-  // const addItem = () => {
-  //   setActiveModal("add-garment");
-  // };
-
   const handleAddItemSubmit = (item) => {
     return addItem(item)
       .then((newItem) => {
@@ -67,30 +60,6 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  // const handleCardDelete = (id) => {
-  //   console.log("Deleting item with id:", id);
-  //   return deleteItem(id)
-  //     .then(() => {
-  //       setClothingItems((clothingItems) =>
-  //         clothingItems.filter((item) => item._id !== id)
-  //       );
-  //       closeActiveModal();
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
-  // const handleCardDelete = () => {
-  //   console.log(`Deleting item with id: ${id}`);
-  //   // console.log("Deleting item with id:", id);
-  //   return deleteItem(id)
-  //     .then(() => {
-  //       setClothingItems((cards) => cards.filter((c) => c.id !== id));
-  //       closeActiveModal();
-  //     })
-
-  //     .catch((err) => console.log("Error deleting item:", err));
-  // };
-
   const handleCardDelete = () => {
     console.log("SelectedCard at delete time:", selectedCard);
     if (!selectedCard || (!selectedCard.id && !selectedCard._id)) {
@@ -100,7 +69,7 @@ function App() {
 
     const cardId = selectedCard.id || selectedCard._id;
 
-    console.log("Deleting card with ID:", selectedCard.id);
+    console.log("Deleting card with ID:", selectedCard._id);
 
     deleteItem(cardId)
       .then(() => {
