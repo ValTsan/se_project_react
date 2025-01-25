@@ -14,7 +14,7 @@ import {
 import { coordinates, APIKey } from "../../utils/constants";
 import Footer from "../Footer/Footer";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
-import AddItemModal from "../../AddItemModal/AddItemModal";
+import AddItemModal from "../AddItemModal/AddItemModal";
 import { getItems, addItem, deleteItem } from "../../utils/api";
 
 function App() {
