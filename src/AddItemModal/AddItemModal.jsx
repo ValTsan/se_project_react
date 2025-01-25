@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ModalWithForm from "../components/ModalWithForm/ModalWithForm";
 
 const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
@@ -30,13 +30,13 @@ const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
     });
   };
 
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     setName("");
-  //     setImageUrl("");
-  //     setWeather("");
-  //   }
-  // }, [isOpen]);
+  useEffect(() => {
+    if (isOpen) {
+      setName("");
+      setImageUrl("");
+      setWeather("");
+    }
+  }, [isOpen]);
 
   return (
     <ModalWithForm

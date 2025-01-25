@@ -24,13 +24,13 @@ function App() {
     city: "",
   });
   const [activeModal, setActiveModal] = useState("");
-  const [selectedCard, setSelectedCard] = useState({});
+  const [selectedCard, setSelectedCard] = useState(null);
   const [temp, setTemp] = useState(0);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
 
   const handleCardClick = (card) => {
-    console.log("Button card clicked!");
+    console.log("Button card clicked:", card);
     setActiveModal("preview");
     setSelectedCard(card);
   };
@@ -79,15 +79,35 @@ function App() {
   //     .catch((err) => console.log(err));
   // };
 
-  const handleCardDelete = (id) => {
-    console.log("Deleting item with id:", id);
-    return deleteItem(id)
-      .then(() => {
-        setClothingItems((cards) => cards.filter((c) => c.id !== id));
-        closeActiveModal();
-      })
+  // const handleCardDelete = () => {
+  //   console.log(`Deleting item with id: ${id}`);
+  //   // console.log("Deleting item with id:", id);
+  //   return deleteItem(id)
+  //     .then(() => {
+  //       setClothingItems((cards) => cards.filter((c) => c.id !== id));
+  //       closeActiveModal();
+  //     })
 
-      .catch((err) => console.log("Error deleting item:", err));
+  //     .catch((err) => console.log("Error deleting item:", err));
+  // };
+
+  const handleCardDelete = () => {
+    if (!selectedCard || !selectedCard.id) {
+      console.error("No card selected or ID is undefined");
+      return;
+    }
+
+    console.log("Deleting card with ID:", selectedCard.id);
+
+    deleteItem(selectedCard.id)
+      .then(() => {
+        setClothingItems((items) =>
+          items.filter((item) => item.id !== selectedCard.id)
+        );
+        setSelectedCard(null);
+        setActiveModal("");
+      })
+      .catch((err) => console.error("Error deleting card:", err));
   };
 
   useEffect(() => {
@@ -162,7 +182,7 @@ function App() {
           <AddItemModal
             isOpen={activeModal === "add-garment"}
             handleCloseClick={closeActiveModal}
-            handleAddItemSubmit={handleAddItemSubmit}
+            onAddItem={handleAddItemSubmit}
           />
         )}
         {activeModal === "preview" && (
