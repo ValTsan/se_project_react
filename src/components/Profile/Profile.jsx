@@ -3,15 +3,23 @@ import "../Profile/Profile.css";
 import SideBar from "../SideBar/SideBar";
 import ClothesSection from "../ClothesSection/ClothesSection";
 
-function Profile({ handleAddClick, onCardClick, clothingItems }) {
+function Profile({
+  handleAddClick,
+  onCardClick,
+  clothingItems,
+  handleAddNewClick,
+}) {
   return (
     <div className="profile">
       <section className="profile__sidebar">
-        <SideBar />
+        <SideBar
+          handleAddNewClick={handleAddNewClick}
+          onCardClick={onCardClick}
+        />
       </section>
       <section className="profile__clothing-items">
         <ClothesSection
-          handleAddClick={handleAddClick} // is this supposed to be handleAddClick? or handleAddClothesClick?
+          handleAddClick={handleAddClick}
           onCardClick={onCardClick}
           clothingItems={clothingItems}
         />
