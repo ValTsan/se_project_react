@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import "./ItemModal.css";
 
 function ItemModal({ activeModal, handleCloseClick, card, onClick }) {
-  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
-
+  console.log("Card received in modal:", card);
   if (!activeModal || !card) {
-    return null;
+    console.error("Modal is inactive or no card provided");
+    return null; // Don't render if inactive or no card is passed
   }
+
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
 
   const handleConfirmDelete = () => {
     onClick();

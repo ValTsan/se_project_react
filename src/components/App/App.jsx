@@ -30,7 +30,7 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
 
   const handleCardClick = (card) => {
-    console.log("Button card clicked:", card);
+    console.log("Card being set as selectedCard:", card);
     setActiveModal("preview");
     setSelectedCard(card);
   };
@@ -92,17 +92,20 @@ function App() {
   // };
 
   const handleCardDelete = () => {
-    if (!selectedCard || !selectedCard.id) {
+    console.log("SelectedCard at delete time:", selectedCard);
+    if (!selectedCard || (!selectedCard.id && !selectedCard._id)) {
       console.error("No card selected or ID is undefined");
       return;
     }
 
+    const cardId = selectedCard.id || selectedCard._id;
+
     console.log("Deleting card with ID:", selectedCard.id);
 
-    deleteItem(selectedCard.id)
+    deleteItem(cardId)
       .then(() => {
         setClothingItems((items) =>
-          items.filter((item) => item.id !== selectedCard.id)
+          items.filter((item) => item.id !== cardId && item._id !== cardId)
         );
         setSelectedCard(null);
         setActiveModal("");
