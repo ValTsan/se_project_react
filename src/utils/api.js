@@ -25,9 +25,12 @@ function addItem(item) {
 }
 
 function deleteItem(id) {
-  if (!id) {
+  console.log("Deleting item with ID:", id);
+
+  if (id === undefined || id === null) {
     throw new Error("ID is required for deletion");
   }
+
   return request(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },

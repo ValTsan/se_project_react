@@ -40,6 +40,11 @@ function App() {
     setActiveModal("add-garment");
   };
 
+  const handleAddNewClick = () => {
+    console.log("Add New button clicked");
+    setActiveModal("add-new");
+  };
+
   const closeActiveModal = () => {
     console.log("Button clicked!");
     setActiveModal("");
@@ -62,12 +67,16 @@ function App() {
 
   const handleCardDelete = () => {
     console.log("SelectedCard at delete time:", selectedCard);
-    if (!selectedCard || (!selectedCard.id && !selectedCard._id)) {
+    if (
+      !selectedCard ||
+      selectedCard._id === undefined ||
+      selectedCard._id === null
+    ) {
       console.error("No card selected or ID is undefined");
       return;
     }
 
-    const cardId = selectedCard.id || selectedCard._id;
+    const cardId = selectedCard._id;
 
     console.log("Deleting card with ID:", selectedCard._id);
 
@@ -143,6 +152,7 @@ function App() {
                   onCardClick={handleCardClick}
                   clothingItems={clothingItems}
                   handleCardDelete={handleCardDelete}
+                  onAdd
                 />
               }
             />
@@ -153,6 +163,14 @@ function App() {
         {activeModal === "add-garment" && (
           <AddItemModal
             isOpen={activeModal === "add-garment"}
+            handleCloseClick={closeActiveModal}
+            onAddItem={handleAddItemSubmit}
+          />
+        )}
+
+        {activeModal === "add-new" && (
+          <AddItemModal
+            isOpen={activeModal === "add-new"}
             handleCloseClick={closeActiveModal}
             onAddItem={handleAddItemSubmit}
           />

@@ -11,7 +11,7 @@ function Profile({ handleAddClick, onCardClick, clothingItems }) {
       </section>
       <section className="profile__clothing-items">
         <ClothesSection
-          handleAddClick={handleAddClick}
+          handleAddClick={handleAddClick} // is this supposed to be handleAddClick? or handleAddClothesClick?
           onCardClick={onCardClick}
           clothingItems={clothingItems}
         />
