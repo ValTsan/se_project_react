@@ -86,7 +86,7 @@ function App() {
           items.filter((item) => item.id !== cardId && item._id !== cardId)
         );
         setSelectedCard(null);
-        setActiveModal("");
+        closeActiveModal();
       })
       .catch((err) => console.error("Error deleting card:", err));
   };
