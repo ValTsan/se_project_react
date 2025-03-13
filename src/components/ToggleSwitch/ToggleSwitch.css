@@ -5,7 +5,6 @@
 .toggle-switch__label {
   display: flex;
   position: relative;
-  margin-left: 475px;
 }
 
 .toggle-switch__checkbox {

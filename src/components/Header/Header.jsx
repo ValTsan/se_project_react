@@ -20,7 +20,9 @@ function Header({ handleAddClick, weatherData }) {
         </Link>
 
         <p className="header__date">
-          {currentDate}, {weatherData.city}
+          {currentDate}
+          {weatherData && weatherData.city ? `, ${weatherData.city}` : ""}
+          {weatherData && weatherData.temp ? ` ${weatherData.temp.F}°F` : ""}
         </p>
         <ToggleSwitch />
         <button
@@ -38,10 +40,10 @@ function Header({ handleAddClick, weatherData }) {
               alt="Terrence Tegegne"
               className="header__avatar"
             />
-            <div className="header__bar"></div>
           </div>
         </Link>
       </div>
+      <div className="header__bar"></div>
     </header>
   );
 }
