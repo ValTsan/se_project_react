@@ -22,7 +22,8 @@ import {
 import { coordinates, APIKey } from "../../utils/constants";
 //Other Imports
 import { getItems, addItem, deleteItem } from "../../../api";
-import { register, login, checkToken } from "../../../auth";
+import auth from "../../../auth";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -37,6 +38,12 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [jwt, setJwt] = useState(localStorage.getItem("jwt"));
+
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    setJwt("");
+    setIsLoggedIn(false);
+  };
 
   const handleCardClick = (card) => {
     console.log("Card being set as selectedCard:", card);
@@ -169,7 +176,14 @@ function App() {
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
         <div className="page__content">
-          <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+          <Header
+            handleAddClick={handleAddClick}
+            weatherData={weatherData}
+            isLoggedIn={isLoggedIn}
+            onLoginClick={() => setActiveModal("login")}
+            onRegisterClick={() => setActiveModal("register")}
+            onLogout={handleLogout}
+          />
 
           <Routes>
             <Route
@@ -187,12 +201,17 @@ function App() {
             <Route
               path="/profile"
               element={
-                <Profile
-                  onCardClick={handleCardClick}
-                  clothingItems={clothingItems}
-                  handleCardDelete={handleCardDelete}
-                  handleAddClick={handleAddClick}
-                  //handleAddNewClick={handleAddNewClick}
+                <ProtectedRoute
+                  isLoggedIn={isLoggedIn}
+                  element={
+                    <Profile
+                      onCardClick={handleCardClick}
+                      clothingItems={clothingItems}
+                      handleCardDelete={handleCardDelete}
+                      handleAddClick={handleAddClick}
+                      //handleAddNewClick={handleAddNewClick}
+                    />
+                  }
                 />
               }
             />
@@ -207,7 +226,6 @@ function App() {
             onAddItem={handleAddItemSubmit}
           />
         )}
-
         {activeModal === "add-new" && (
           <AddItemModal
             isOpen={activeModal === "add-new"}
@@ -221,6 +239,28 @@ function App() {
             card={selectedCard}
             handleCloseClick={closeActiveModal}
             onClick={handleCardDelete}
+          />
+        )}
+        {activeModal === "register" && (
+          <RegisterModal
+            isOpen={activeModal === "register"}
+            onClose={closeActiveModal}
+            onRegister={handleRegister}
+            // activeModal={activeModal}
+            // card={selectedCard}
+            // handleCloseClick={closeActiveModal}
+            // onClick={handleCardDelete}
+          />
+        )}
+        {activeModal === "login" && (
+          <LoginModal
+            isOpen={activeModal === "login"}
+            onClose={closeActiveModal}
+            onLogin={handleLogin}
+            // activeModal={activeModal}
+            // card={selectedCard}
+            // handleCloseClick={closeActiveModal}
+            // onClick={handleCardDelete}
           />
         )}
       </CurrentTemperatureUnitContext.Provider>

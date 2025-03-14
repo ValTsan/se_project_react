@@ -1,4 +1,4 @@
-const API_URL = "https://your-api-url.com";
+const API_URL = "http://localhost:3001";
 
 const register = (name, avatar, email, password) => {
   return fetch(`${API_URL}/signup`, {
