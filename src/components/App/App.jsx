@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 
+import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
-import ItemModal from "../ItemModal/ItemModal";
 import Profile from "../Profile/Profile";
+import Footer from "../Footer/Footer";
+//Modal Imports
+import ItemModal from "../ItemModal/ItemModal";
+import AddItemModal from "../AddItemModal/AddItemModal";
+import LoginModal from "../LoginModal/LoginModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
+//Context Imports
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+//Utils Imports
 import {
   getWeather,
   getWeatherType,
   filterWeatherData,
 } from "../../utils/weatherApi";
 import { coordinates, APIKey } from "../../utils/constants";
-import Footer from "../Footer/Footer";
-import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
-import AddItemModal from "../AddItemModal/AddItemModal";
-import { getItems, addItem, deleteItem } from "../../utils/api";
+//Other Imports
+import { getItems, addItem, deleteItem } from "../../../api";
+import { register, login, checkToken } from "../../../auth";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -28,11 +35,31 @@ function App() {
   const [temp, setTemp] = useState(0);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [jwt, setJwt] = useState(localStorage.getItem("jwt"));
 
   const handleCardClick = (card) => {
     console.log("Card being set as selectedCard:", card);
     setActiveModal("preview");
     setSelectedCard(card);
+  };
+
+  const handleRegister = (name, avatar, email, password) => {
+    auth
+      .register(name, avatar, email, password)
+      .then(() => handleLogin(email, password))
+      .catch((error) => console.error("Registration failed", error));
+  };
+
+  const handleLogin = (email, password) => {
+    auth
+      .login(email, password)
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+        setJwt(res.token);
+        setIsLoggedIn(true);
+      })
+      .catch((error) => console.error("Login failed", error));
   };
 
   const handleAddClick = () => {
@@ -90,6 +117,18 @@ function App() {
       })
       .catch((err) => console.error("Error deleting card:", err));
   };
+
+  useEffect(() => {
+    if (jwt) {
+      auth
+        .checkToken(jwt)
+        .then(() => setIsLoggedIn(true))
+        .catch(() => {
+          setIsLoggedIn(false);
+          localStorage.removeItem("jwt");
+        });
+    }
+  }, [jwt]);
 
   useEffect(() => {
     getWeather(coordinates, APIKey)
