@@ -50,9 +50,27 @@
   border: none;
 }
 
+.header__login-btn {
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  border: none;
+}
+
+.header__register-btn {
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  border: none;
+}
 .header__user-container {
   display: flex;
   align-items: center;
+  white-space: nowrap;
+  padding: 32px 0 28px;
+  max-width: 1360px;
 }
 
 .header__username {

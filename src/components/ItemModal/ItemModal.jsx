@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./ItemModal.css";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ItemModal({ activeModal, handleCloseClick, card, onClick }) {
+  const currentUser = useContext(CurrentUserContext);
+  if (!card) return null;
+
   console.log("Card received in modal:", card);
   if (!activeModal || !card) {
     console.error("Modal is inactive or no card provided");
@@ -9,6 +13,8 @@ function ItemModal({ activeModal, handleCloseClick, card, onClick }) {
   }
 
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+
+  const isOwn = card.owner === currentUser?._id;
 
   const handleConfirmDelete = () => {
     onClick();
@@ -40,14 +46,16 @@ function ItemModal({ activeModal, handleCloseClick, card, onClick }) {
             <img src={card.imageUrl} alt="Clothes" className="modal__image" />
             <div className="modal__footer">
               <h2 className="modal__caption">{card.name}</h2>
-              <button
-                onClick={() => setIsConfirmationOpen(true)}
-                //onClick={handleCardDelete}
-                type="button"
-                className="modal__delete"
-              >
-                Delete item
-              </button>
+              {isOwn && (
+                <button
+                  onClick={() => setIsConfirmationOpen(true)}
+                  //onClick={handleCardDelete}
+                  type="button"
+                  className="modal__delete"
+                >
+                  Delete item
+                </button>
+              )}
               <p className="modal__weather">Weather : {card.weather}</p>
             </div>
           </div>

@@ -1,8 +1,8 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const LoginModal = ({ isOpen, onClose, onLogin }) => {
+const LoginModal = ({ isOpen, onClose, onLogin, onRegisterClick }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,6 +26,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
       isOpen={isOpen}
       onSubmit={handleLoginSubmit}
       handleCloseClick={onClose}
+      customClass="modal__content--login"
     >
       <label htmlFor="email" className="modal__label">
         Email*
@@ -51,6 +52,14 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
           onChange={handlePasswordChange}
         />
       </label>
+      <button
+        type="button"
+        onClick={onRegisterClick}
+        className="modal__register-btn"
+        aria-label="Register button"
+      >
+        or Register
+      </button>
     </ModalWithForm>
   );
 };

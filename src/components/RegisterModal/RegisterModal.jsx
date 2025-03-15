@@ -16,14 +16,14 @@ const RegisterModal = ({ handleCloseClick, onRegister, isOpen }) => {
     setPassword(evt.target.value);
   };
 
-  const handleNameChange = (e) => {
-    console.log(e.target.value);
-    setName(e.target.value);
+  const handleNameChange = (evt) => {
+    console.log(evt.target.value);
+    setName(evt.target.value);
   };
 
-  const handleUrlChange = (e) => {
-    console.log(e.target.value);
-    setAvatarUrl(e.target.value);
+  const handleUrlChange = (evt) => {
+    console.log(evt.target.value);
+    setAvatarUrl(evt.target.value);
   };
 
   const handleRegisterSubmit = (e) => {
@@ -52,9 +52,10 @@ const RegisterModal = ({ handleCloseClick, onRegister, isOpen }) => {
       handleCloseClick={handleCloseClick}
       isOpen={isOpen}
       onSubmit={handleRegisterSubmit}
+      customClass="modal__content--register"
     >
       <label htmlFor="name" className="modal__label">
-        Name
+        Name{" "}
         <input
           type="text"
           className="modal__input"
@@ -65,7 +66,7 @@ const RegisterModal = ({ handleCloseClick, onRegister, isOpen }) => {
         />
       </label>
       <label htmlFor="email" className="modal__label">
-        Email*
+        Email*{" "}
         <input
           type="email"
           className="modal__input"
@@ -76,7 +77,7 @@ const RegisterModal = ({ handleCloseClick, onRegister, isOpen }) => {
         />
       </label>
       <label htmlFor="password" className="modal__label">
-        Password*
+        Password*{" "}
         <input
           type="password"
           className="modal__input"
