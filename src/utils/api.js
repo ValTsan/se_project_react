@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000";
+const BASE_URL = "http://localhost:3001";
 
 function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
@@ -9,13 +9,18 @@ function request(url, options) {
 }
 
 function getItems() {
-  return request(`${baseUrl}/items`);
+  return request(`${BASE_URL}/items`);
 }
 
 function addItem(item) {
-  return request(`${baseUrl}/items`, {
+  const token = localStorage.getItem("jwt");
+
+  return request(`${BASE_URL}/items`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify({
       name: item.name,
       imageUrl: item.imageUrl,
@@ -24,17 +29,60 @@ function addItem(item) {
   });
 }
 
-function deleteItem(id) {
-  console.log("Deleting item with ID:", id);
+function updateCurrentUser({ name, avatar }) {
+  const token = localStorage.getItem("jwt");
 
-  if (id === undefined || id === null) {
-    throw new Error("ID is required for deletion");
-  }
-
-  return request(`${baseUrl}/items/${id}`, {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json" },
+  return request(`${BASE_URL}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
   });
 }
 
-export { getItems, addItem, deleteItem, checkResponse };
+function addCardLike(id) {
+  const token = localStorage.getItem("jwt");
+  return request(`${BASE_URL}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+function removeCardLike(id) {
+  const token = localStorage.getItem("jwt");
+  return request(`${BASE_URL}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+function deleteItem(id) {
+  console.log("Deleting item with ID:", id);
+  const token = localStorage.getItem("jwt");
+
+  return request(`${BASE_URL}/items/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+export {
+  getItems,
+  addItem,
+  deleteItem,
+  updateCurrentUser,
+  checkResponse,
+  addCardLike,
+  removeCardLike,
+};

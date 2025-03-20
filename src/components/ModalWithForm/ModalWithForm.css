@@ -9,6 +9,7 @@
   bottom: 0;
   background-color: #0000004d;
   visibility: hidden;
+  z-index: 999;
 }
 
 .modal__title {
@@ -37,7 +38,6 @@
   border: none;
   background-color: currentColor;
   cursor: pointer;
-  position: absolute;
 }
 
 .modal__content {
@@ -46,13 +46,13 @@
   padding: 28px 28px 26px;
   max-width: 496px;
   width: 100%;
-  height: 436px;
   border-radius: 10px;
   box-sizing: border-box;
   font-family: "Cabinet Grotesk";
   font-size: 16px;
   font-weight: 700;
-  line-height: 24px;
+  /* height: 436px;
+  line-height: 24px; */
 }
 
 .modal__content.modal__content--login {
@@ -65,7 +65,13 @@
   background: white;
   width: 91px;
   height: 22px;
+  cursor: pointer;
 }
+
+.modal__register-btn:hover {
+  text-decoration: underline;
+}
+
 .modal__form {
   display: flex;
   flex-direction: column;
@@ -76,6 +82,7 @@
   width: 100%;
   margin: 0;
   padding: 0;
+  margin-bottom: 4px;
 }
 
 .modal__radio-button {
@@ -104,19 +111,19 @@
 .modal__input {
   border: none;
   border-bottom: 1px solid #000000;
-  margin-bottom: 24px;
   padding-top: 8px;
+  /* margin-bottom: 24px; */
 }
 
 .modal__submit {
   width: 124px;
   height: 36px;
   color: #ffffff;
-  /* margin-top: 32px; */
   background-color: #000000;
   border: none;
   opacity: 30%;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .modal__content.modal__content_type_image {
@@ -132,6 +139,8 @@
   margin: 0;
   padding: 0;
   display: block;
+  width: 498px;
+  height: 498px;
 }
 
 .modal__caption {
@@ -170,3 +179,38 @@
   width: 498px;
   height: 112px;
 }
+
+.modal__error {
+  color: #ff4d4d;
+  font-size: 12px;
+  margin-top: 4px;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  margin-top: 4px;
+}
+
+.modal__input_type_error {
+  border: 1px solid #ff4d4d;
+  background-color: #fff0f0;
+}
+
+.modal__label {
+  position: relative;
+  display: block;
+  margin-bottom: 22px;
+}
+
+.modal__button-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* .modal__submit {
+  opacity: 1;
+}
+
+.modal__submit:disabled {
+  opacity: 0.3;
+} */

@@ -10,7 +10,6 @@ function Header({
   onLoginClick,
   isLoggedIn,
   onRegisterClick,
-  onLogout,
 }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
@@ -35,6 +34,13 @@ function Header({
       <div className="header__user-container">
         {isLoggedIn ? (
           <>
+            <button
+              onClick={handleAddClick}
+              type="button"
+              className="header__add-clothes-btn"
+            >
+              + Add clothes{" "}
+            </button>
             <Link to="/profile" className="header__link">
               <p className="header__username">{userName}</p>
               <img
@@ -43,16 +49,6 @@ function Header({
                 className="header__avatar"
               />
             </Link>
-            <button
-              onClick={handleAddClick}
-              type="button"
-              className="header__add-clothes-btn"
-            >
-              + Add clothes{" "}
-            </button>
-            <button onClick={onLogout} className="header__logout-btn">
-              Log out
-            </button>
           </>
         ) : (
           <>

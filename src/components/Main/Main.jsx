@@ -9,6 +9,7 @@ function Main({
   handleCardClick,
   clothingItems,
   handleCardDelete,
+  handleCardLike,
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   console.log(currentTemperatureUnit);
@@ -32,6 +33,7 @@ function Main({
                   key={item._id}
                   item={item}
                   onCardClick={handleCardClick}
+                  handleCardLike={handleCardLike}
                   onClick={handleCardDelete}
                 />
               );

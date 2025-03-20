@@ -45,3 +45,23 @@
   gap: 21px;
   flex-grow: 1;
 }
+
+.card__like-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 90px;
+  transition: transform 0.3s ease;
+}
+
+card__like-btn:hover {
+  transform: scale(1.1);
+}
+
+.card__like-btn img {
+  width: 21px;
+  height: 18px;
+}

@@ -12,10 +12,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.modal__close-confirmation {
-  background-image: url(../../assets/desktop_close.svg);
+  font-family: "Cabinet Grotesk";
 }
 
 .modal__confirm-heading {
@@ -38,6 +35,19 @@
   line-height: 24px;
   border: none;
   margin: 40px 0 24px 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.modal__cancel-btn {
+  align-items: center;
+  background-color: #fff;
+  color: #000000;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  border: none;
+  margin: 0;
   padding: 0;
   cursor: pointer;
 }

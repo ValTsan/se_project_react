@@ -3,6 +3,7 @@
   align-items: center;
   width: 229px;
   height: 56px;
+  padding-bottom: 24px;
 }
 
 .sidebar__avatar {

@@ -11,6 +11,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 //Context Imports
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -22,8 +23,15 @@ import {
 } from "../../utils/weatherApi";
 import { coordinates, APIKey } from "../../utils/constants";
 //Other Imports
-import { getItems, addItem, deleteItem } from "../../utils/api";
-import { register, login, checkToken } from "../../utils/auth";
+import {
+  getItems,
+  addItem,
+  deleteItem,
+  updateCurrentUser,
+  addCardLike,
+  removeCardLike,
+} from "../../utils/api";
+import auth from "../../utils/auth";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
@@ -53,13 +61,17 @@ function App() {
     setSelectedCard(card);
   };
 
-  const handleRegister = (name, avatar, email, password) => {
-    console.log("Setting active modal to register");
-    setActiveModal("register");
-    return register(name, avatar, email, password)
+  const handleRegister = ({ name, email, password, avatar }) => {
+    console.log("Starting registration process...");
+    auth
+      .register({ name, avatar, email, password })
       .then((res) => {
-        console.log("User registered:", res);
-        return handleLogin(email, password);
+        if (res) {
+          console.log("Registration successful:", res);
+          console.log("Attempting automatic login with:", { email, password });
+          handleLogin({ email, password });
+          closeActiveModal();
+        }
       })
       .catch((error) => {
         console.error("Registration failed", error);
@@ -71,25 +83,55 @@ function App() {
   };
 
   const handleLogin = (email, password) => {
-    console.log("Setting active modal to login");
-    setActiveModal("login");
-    return login(email, password)
+    console.log("Starting login process...");
+    auth
+      .login(email, password)
       .then((res) => {
+        console.log(
+          "Login successful, received token:",
+          res.token ? "Token exists" : "No token"
+        );
         localStorage.setItem("jwt", res.token);
         setJwt(res.token);
         setIsLoggedIn(true);
+        console.log("Login state updated, closing modal...");
+        closeActiveModal();
       })
-      .catch((error) => console.error("Login failed", error));
+      .catch((error) => {
+        console.error("Login failed - Detailed error:", error);
+      });
+  };
+
+  const handleUpdateCurrentUser = ({ name, avatar }) => {
+    return updateCurrentUser({ name, avatar })
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+      })
+      .catch((err) => console.log(err));
+    throw err;
+  };
+
+  const handleCardLike = ({ id, isLiked }) => {
+    !isLiked
+      ? addCardLike(id)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err))
+      : removeCardLike(id)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err));
   };
 
   const handleAddClick = () => {
     console.log("Add Clothes button clicked!");
     setActiveModal("add-garment");
-  };
-
-  const handleAddNewClick = () => {
-    console.log("Add New button clicked");
-    setActiveModal("add-new");
   };
 
   const closeActiveModal = () => {
@@ -140,7 +182,8 @@ function App() {
 
   useEffect(() => {
     if (jwt) {
-      checkToken(jwt)
+      auth
+        .checkToken(jwt)
         .then((userData) => {
           setCurrentUser(userData);
           setIsLoggedIn(true);
@@ -199,7 +242,6 @@ function App() {
               isLoggedIn={isLoggedIn}
               onLoginClick={() => setActiveModal("login")}
               onRegisterClick={() => setActiveModal("register")}
-              onLogout={handleLogout}
             />
 
             <Routes>
@@ -212,6 +254,7 @@ function App() {
                     weatherTemp={temp}
                     clothingItems={clothingItems}
                     handleCardDelete={handleCardDelete}
+                    handleCardLike={handleCardLike}
                   />
                 }
               />
@@ -226,6 +269,10 @@ function App() {
                       )}
                       handleCardDelete={handleCardDelete}
                       handleAddClick={handleAddClick}
+                      onUpdateUser={handleUpdateCurrentUser}
+                      onEditProfileClick={() => setActiveModal("edit-profile")}
+                      handleCardLike={handleCardLike}
+                      onLogout={handleLogout}
                       //handleAddNewClick={handleAddNewClick}
                     />
                   </ProtectedRoute>
@@ -270,6 +317,13 @@ function App() {
               onClose={closeActiveModal}
               onLogin={handleLogin}
               onRegisterClick={handleRegisterClick}
+            />
+          )}
+          {activeModal === "edit-profile" && (
+            <EditProfileModal
+              isOpen={activeModal === "edit-profile"}
+              onClose={closeActiveModal}
+              onUpdateUser={handleUpdateCurrentUser}
             />
           )}
         </CurrentTemperatureUnitContext.Provider>

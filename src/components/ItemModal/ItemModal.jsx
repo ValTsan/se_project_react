@@ -13,23 +13,16 @@ function ItemModal({ activeModal, handleCloseClick, card, onClick }) {
   }
 
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
-
   const isOwn = card.owner === currentUser?._id;
 
-  const handleConfirmDelete = () => {
+  const handleDeleteConfirm = () => {
     onClick();
-    setIsConfirmationOpen(false);
     handleCloseClick();
   };
 
-  // const handleCardDelete = (card) => {
-  //   console.log("Opening modal for card:", card);
-  //   setIsConfirmationOpen(true);
-  // };
-
-  // const handleCancelDelete = () => {
-  //   setIsConfirmationOpen(false);
-  // };
+  const handleCancel = () => {
+    setIsConfirmationOpen(false);
+  };
 
   return (
     <>
@@ -49,7 +42,6 @@ function ItemModal({ activeModal, handleCloseClick, card, onClick }) {
               {isOwn && (
                 <button
                   onClick={() => setIsConfirmationOpen(true)}
-                  //onClick={handleCardDelete}
                   type="button"
                   className="modal__delete"
                 >
@@ -66,8 +58,7 @@ function ItemModal({ activeModal, handleCloseClick, card, onClick }) {
         <div className="modal modal_opened">
           <div className="modal__container modal__container_confirmation">
             <button
-              onClick={() => setIsConfirmationOpen(false)}
-              //onClick={handleCancelDelete}
+              onClick={handleCancel}
               type="button"
               className="modal__close modal__close-confirmation"
               aria-label="Close button"
@@ -78,7 +69,7 @@ function ItemModal({ activeModal, handleCloseClick, card, onClick }) {
             </p>
             <button
               type="text"
-              onClick={handleConfirmDelete}
+              onClick={handleDeleteConfirm}
               className="modal__confirm-btn"
               aria-label="Delete button"
             >
@@ -86,8 +77,7 @@ function ItemModal({ activeModal, handleCloseClick, card, onClick }) {
             </button>
             <button
               type="text"
-              onClick={() => setIsConfirmationOpen(false)}
-              //onClick={handleCancelDelete}
+              onClick={handleCancel}
               className="modal__cancel-btn"
               aria-label="Cancel button"
             >

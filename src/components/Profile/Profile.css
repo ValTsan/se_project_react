@@ -1,9 +1,28 @@
 .profile {
   display: flex;
   gap: 116px;
+  flex-grow: 1;
 }
 
 .profile__sidebar {
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.8px;
+}
+
+.profile__edit-btn {
+  border: none;
+  padding-bottom: 8px;
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.8px;
+}
+
+.profile__logout-btn {
+  display: flex;
+  border: none;
   font-family: "Cabinet Grotesk";
   font-size: 20px;
   font-weight: 700;

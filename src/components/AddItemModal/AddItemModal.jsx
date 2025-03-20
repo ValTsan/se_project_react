@@ -106,6 +106,9 @@ const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
           />
           Cold
         </label>
+        {/* <button type="submit" className="modal__submit" disabled={!isFormValid}>
+          Submit
+        </button> */}
       </fieldset>
     </ModalWithForm>
   );
