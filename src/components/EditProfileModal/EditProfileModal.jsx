@@ -25,13 +25,7 @@ const EditProfileModal = ({ onClose, onUpdateUser, isOpen }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdateUser({ name, avatar })
-      .then(() => {
-        onClose();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    onUpdateUser({ name, avatar });
   };
 
   return (

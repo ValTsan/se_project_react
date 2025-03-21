@@ -1,47 +1,38 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useForm } from "../hooks/useForm";
 
 const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
-  const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [weather, setWeather] = useState("");
-
-  const handleNameChange = (e) => {
-    console.log(e.target.value);
-    setName(e.target.value);
-  };
-
-  const handleUrlChange = (e) => {
-    console.log(e.target.value);
-    setImageUrl(e.target.value);
-  };
-
-  const handleWeatherChange = (evt) => {
-    setWeather(evt.target.value);
-  };
+  const [isLoading, setIsLoading] = React.useState(false);
+  const { values, handleChange, setValues } = useForm({
+    name: "",
+    imageUrl: "",
+    weather: "",
+  });
 
   const handleAddItemSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, imageUrl, weather }, () => {
-      setName("");
-      setImageUrl("");
-      setWeather("");
-    });
+    setIsLoading(true);
+    onAddItem(values)
+      .then(() => {
+        setValues({ name: "", imageUrl: "", weather: "" });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
     if (isOpen) {
-      setName("");
-      setImageUrl("");
-      setWeather("");
+      setValues({ name: "", imageUrl: "", weather: "" });
     }
-  }, [isOpen]);
+  }, [isOpen, setValues]);
 
   return (
     <ModalWithForm
       title="New Garment"
-      buttonText="Add Garment"
+      buttonText={isLoading ? "Saving..." : "Add Garment"}
       handleCloseClick={handleCloseClick}
       isOpen={isOpen}
       onSubmit={handleAddItemSubmit}
@@ -52,9 +43,10 @@ const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
           type="text"
           className="modal__input"
           id="name"
+          name="name"
           placeholder="Name"
-          value={name}
-          onChange={handleNameChange}
+          value={values.name}
+          onChange={handleChange}
         />
       </label>
       <label htmlFor="imageUrl" className="modal__label">
@@ -63,9 +55,10 @@ const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
           type="url"
           className="modal__input"
           id="imageUrl"
+          name="imageUrl"
           placeholder="Image URL"
-          value={imageUrl}
-          onChange={handleUrlChange}
+          value={values.imageUrl}
+          onChange={handleChange}
         />
       </label>
       <fieldset className="modal__radio-button">
@@ -74,11 +67,11 @@ const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
           <input
             id="hot"
             type="radio"
-            name="radio__buttons"
+            name="weather"
             className="modal__radio-input"
             value="hot"
-            checked={weather === "hot"}
-            onChange={handleWeatherChange}
+            checked={values.weather === "hot"}
+            onChange={handleChange}
           />
           Hot
         </label>
@@ -86,11 +79,11 @@ const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
           <input
             id="warm"
             type="radio"
-            name="radio__buttons"
+            name="weather"
             className="modal__radio-input"
             value="warm"
-            checked={weather === "warm"}
-            onChange={handleWeatherChange}
+            checked={values.weather === "warm"}
+            onChange={handleChange}
           />
           Warm
         </label>
@@ -98,11 +91,11 @@ const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
           <input
             id="cold"
             type="radio"
-            name="radio__buttons"
+            name="weather"
             className="modal__radio-input"
             value="cold"
-            checked={weather === "cold"}
-            onChange={handleWeatherChange}
+            checked={values.weather === "cold"}
+            onChange={handleChange}
           />
           Cold
         </label>

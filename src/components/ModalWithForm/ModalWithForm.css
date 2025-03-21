@@ -68,6 +68,14 @@
   cursor: pointer;
 }
 
+.modal__login-btn {
+  border: none;
+  background: white;
+  width: 91px;
+  height: 22px;
+  cursor: pointer;
+}
+
 .modal__register-btn:hover {
   text-decoration: underline;
 }

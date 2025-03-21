@@ -48,6 +48,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [jwt, setJwt] = useState(localStorage.getItem("jwt"));
   const [currentUser, setCurrentUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
@@ -61,32 +62,36 @@ function App() {
     setSelectedCard(card);
   };
 
+  const handleSubmit = (request) => {
+    setIsLoading(true);
+    request()
+      .then(closeActiveModal)
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
+  };
+
   const handleRegister = ({ name, email, password, avatar }) => {
     console.log("Starting registration process...");
-    auth
-      .register({ name, avatar, email, password })
-      .then((res) => {
-        if (res) {
+    const makeRequest = () =>
+      auth.register({ name, avatar, email, password }).then((res) => {
+        {
           console.log("Registration successful:", res);
           console.log("Attempting automatic login with:", { email, password });
           handleLogin({ email, password });
-          closeActiveModal();
         }
-      })
-      .catch((error) => {
-        console.error("Registration failed", error);
+        return res;
       });
+    handleSubmit(makeRequest);
   };
 
   const handleRegisterClick = () => {
     setActiveModal("register");
   };
 
-  const handleLogin = (email, password) => {
+  const handleLogin = ({ email, password }) => {
     console.log("Starting login process...");
-    auth
-      .login(email, password)
-      .then((res) => {
+    const makeRequest = () => {
+      return auth.login({ email, password }).then((res) => {
         console.log(
           "Login successful, received token:",
           res.token ? "Token exists" : "No token"
@@ -95,38 +100,30 @@ function App() {
         setJwt(res.token);
         setIsLoggedIn(true);
         console.log("Login state updated, closing modal...");
-        closeActiveModal();
-      })
-      .catch((error) => {
-        console.error("Login failed - Detailed error:", error);
       });
+    };
+    handleSubmit(makeRequest);
   };
 
   const handleUpdateCurrentUser = ({ name, avatar }) => {
-    return updateCurrentUser({ name, avatar })
-      .then((updatedUser) => {
+    const makeRequest = () =>
+      updateCurrentUser({ name, avatar }).then((updatedUser) => {
         setCurrentUser(updatedUser);
-      })
-      .catch((err) => console.log(err));
-    throw err;
+        return updatedUser;
+      });
+    handleSubmit(makeRequest);
   };
 
   const handleCardLike = ({ id, isLiked }) => {
-    !isLiked
-      ? addCardLike(id)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
-            );
-          })
-          .catch((err) => console.log(err))
-      : removeCardLike(id)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
-            );
-          })
-          .catch((err) => console.log(err));
+    const makeRequest = () => {
+      const likeRequest = !isLiked ? addCardLike(id) : removeCardLike(id);
+      return likeRequest.then((updatedCard) => {
+        setClothingItems((cards) =>
+          cards.map((item) => (item._id === id ? updatedCard : item))
+        );
+      });
+    };
+    handleSubmit(makeRequest);
   };
 
   const handleAddClick = () => {
@@ -145,13 +142,12 @@ function App() {
   };
 
   const handleAddItemSubmit = (item) => {
-    return addItem(item)
-      .then((newItem) => {
+    const makeRequest = () =>
+      addItem(item).then((newItem) => {
         console.log("New Item Added:", newItem);
         setClothingItems((clothingItems) => [newItem, ...clothingItems]);
-        closeActiveModal();
-      })
-      .catch((err) => console.log(err));
+      });
+    handleSubmit(makeRequest);
   };
 
   const handleCardDelete = () => {
@@ -167,17 +163,15 @@ function App() {
 
     const cardId = selectedCard._id;
 
-    console.log("Deleting card with ID:", selectedCard._id);
-
-    deleteItem(cardId)
-      .then(() => {
+    const makeRequest = () =>
+      deleteItem(cardId).then(() => {
+        console.log("Deleting card with ID:", selectedCard._id);
         setClothingItems((items) =>
           items.filter((item) => item.id !== cardId && item._id !== cardId)
         );
         setSelectedCard(null);
-        closeActiveModal();
-      })
-      .catch((err) => console.error("Error deleting card:", err));
+      });
+    handleSubmit(makeRequest);
   };
 
   useEffect(() => {

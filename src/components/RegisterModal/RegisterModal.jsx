@@ -2,7 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const RegisterModal = ({ handleCloseClick, onRegister, isOpen }) => {
+const RegisterModal = ({
+  handleCloseClick,
+  onRegister,
+  isOpen,
+  onLoginClick,
+}) => {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [email, setEmail] = useState("");
@@ -99,12 +104,22 @@ const RegisterModal = ({ handleCloseClick, onRegister, isOpen }) => {
   return (
     <ModalWithForm
       title="Register"
-      buttonText="Register"
+      buttonText="Next"
       handleCloseClick={handleCloseClick}
       isOpen={isOpen}
       onSubmit={handleRegisterSubmit}
       customClass="modal__content--register"
       isFormValid={isFormValid}
+      additionalButtons={
+        <button
+          type="button"
+          onClick={onLoginClick}
+          className="modal__login-btn"
+          aria-label="Login button"
+        >
+          or Log in
+        </button>
+      }
     >
       <label htmlFor="name" className="modal__label">
         Name{" "}
