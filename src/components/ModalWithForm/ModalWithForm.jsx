@@ -1,5 +1,5 @@
 import "./ModalWithForm.css";
-import useModalClose from "../hooks/UseModalClose";
+import useModalClose from "../Hooks/UseModalClose";
 
 function ModalWithForm({
   children,
