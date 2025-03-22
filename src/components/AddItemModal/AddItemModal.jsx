@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { UseForm } from "../../../hooks/UseForm";
+import { UseForm } from "../../Hooks/useForm";
 
 const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
   const [isLoading, setIsLoading] = React.useState(false);
