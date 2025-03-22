@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useFormAndValidation } from "../Hooks/useFormAndValidation";
+import { UseFormAndValidation } from "../Hooks/useFormAndValidation";
 
 const LoginModal = ({ isOpen, onClose, onLogin, onRegisterClick }) => {
   const {
@@ -13,7 +13,7 @@ const LoginModal = ({ isOpen, onClose, onLogin, onRegisterClick }) => {
     setIsValid,
     setValues,
     setErrors,
-  } = useFormAndValidation();
+  } = UseFormAndValidation();
 
   const [isLoading, setIsLoading] = useState(false);
 

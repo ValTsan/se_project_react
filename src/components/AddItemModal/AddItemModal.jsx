@@ -1,11 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useForm } from "../Hooks/UseForm";
+import { UseForm } from "../Hooks/UseForm";
 
 const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
   const [isLoading, setIsLoading] = React.useState(false);
-  const { values, handleChange, setValues } = useForm({
+  const { values, handleChange, setValues } = UseForm({
     name: "",
     imageUrl: "",
     weather: "",
