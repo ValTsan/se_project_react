@@ -14,13 +14,17 @@ function Profile({
   onUpdateUser,
   onEditProfileClick,
   handleCardLike,
+  currentUser,
 }) {
+  console.log("Profile component currentUser:", currentUser);
+
   return (
     <div className="profile">
       <section className="profile__sidebar">
         <SideBar
           handleAddNewClick={handleAddNewClick}
           onCardClick={onCardClick}
+          currentUser={currentUser}
         />
         <button className="profile__edit-btn" onClick={onEditProfileClick}>
           Change profile data

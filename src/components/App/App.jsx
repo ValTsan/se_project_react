@@ -269,7 +269,7 @@ function App() {
                       onEditProfileClick={() => setActiveModal("edit-profile")}
                       handleCardLike={handleCardLike}
                       onLogout={handleLogout}
-                      //handleAddNewClick={handleAddNewClick}
+                      currentUser={currentUser}
                     />
                   </ProtectedRoute>
                 }
