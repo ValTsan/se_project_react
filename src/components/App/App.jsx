@@ -236,6 +236,8 @@ function App() {
               isLoggedIn={isLoggedIn}
               onLoginClick={() => setActiveModal("login")}
               onRegisterClick={() => setActiveModal("register")}
+              userName={currentUser?.name}
+              userAvatar={currentUser?.avatar}
             />
 
             <Routes>

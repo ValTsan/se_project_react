@@ -1,4 +1,5 @@
 import "./ModalWithForm.css";
+import useModalClose from "../hooks/useModalClose";
 
 function ModalWithForm({
   children,
@@ -11,6 +12,8 @@ function ModalWithForm({
   isFormValid = true,
   additionalButtons,
 }) {
+  useModalClose(isOpen, handleCloseClick);
+
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className={`modal__content ${customClass || ""}`.trim()}>
@@ -19,6 +22,7 @@ function ModalWithForm({
           onClick={handleCloseClick}
           type="button"
           className="modal__close"
+          aria-label="Close modal"
         />
         <form className="modal__form" onSubmit={onSubmit}>
           {children}

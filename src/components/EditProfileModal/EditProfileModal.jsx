@@ -28,11 +28,16 @@ const EditProfileModal = ({ onClose, onUpdateUser, isOpen }) => {
     onUpdateUser({ name, avatar });
   };
 
+  const handleClose = () => {
+    console.log("Close button clicked");
+    onClose();
+  };
+
   return (
     <ModalWithForm
       title="Edit Profile"
       buttonText="Save"
-      onClose={onClose}
+      handleCloseClick={handleClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
       customClass="modal__content--edit-profile"

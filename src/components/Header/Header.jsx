@@ -10,13 +10,13 @@ function Header({
   onLoginClick,
   isLoggedIn,
   onRegisterClick,
+  userName,
+  userAvatar,
 }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
-
-  const userName = "Terence Tegegne";
 
   return (
     <header className="header">
@@ -44,8 +44,8 @@ function Header({
             <Link to="/profile" className="header__link">
               <p className="header__username">{userName}</p>
               <img
-                src={headerAvatar}
-                alt="Terrence Tegegne"
+                src={userAvatar || headerAvatar}
+                alt={userName || "User Avatar"}
                 className="header__avatar"
               />
             </Link>
