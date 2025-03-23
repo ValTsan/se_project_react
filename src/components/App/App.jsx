@@ -88,6 +88,10 @@ function App() {
     setActiveModal("register");
   };
 
+  const handleLoginClick = () => {
+    setActiveModal("login");
+  };
+
   const handleLogin = ({ email, password }) => {
     console.log("Starting login process...");
     const makeRequest = () => {
@@ -305,6 +309,7 @@ function App() {
               isOpen={activeModal === "register"}
               onRegister={handleRegister}
               handleCloseClick={closeActiveModal}
+              onLoginClick={handleLoginClick}
             />
           )}
           {activeModal === "login" && (
