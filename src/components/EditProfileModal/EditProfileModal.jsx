@@ -3,7 +3,7 @@ import "./EditProfileModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-const EditProfileModal = ({ onClose, onUpdateUser, isOpen }) => {
+const EditProfileModal = ({ onClose, onUpdateUser, isOpen, isLoading }) => {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -36,7 +36,7 @@ const EditProfileModal = ({ onClose, onUpdateUser, isOpen }) => {
   return (
     <ModalWithForm
       title="Edit Profile"
-      buttonText="Save"
+      buttonText={isLoading ? "Saving..." : "Save"}
       handleCloseClick={handleClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}

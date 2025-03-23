@@ -3,7 +3,13 @@ import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { UseFormAndValidation } from "../../Hooks/useFormAndValidation";
 
-const LoginModal = ({ isOpen, onClose, onLogin, onRegisterClick }) => {
+const LoginModal = ({
+  isOpen,
+  onClose,
+  onLogin,
+  onRegisterClick,
+  isLoading,
+}) => {
   const {
     values,
     handleChange,
@@ -14,8 +20,6 @@ const LoginModal = ({ isOpen, onClose, onLogin, onRegisterClick }) => {
     setValues,
     setErrors,
   } = UseFormAndValidation();
-
-  const [isLoading, setIsLoading] = useState(false);
 
   const validateEmail = (email) => {
     return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
@@ -30,7 +34,6 @@ const LoginModal = ({ isOpen, onClose, onLogin, onRegisterClick }) => {
       return;
     }
 
-    setIsLoading(true);
     try {
       await onLogin({ email: values.email, password: values.password });
     } catch (err) {
@@ -39,8 +42,6 @@ const LoginModal = ({ isOpen, onClose, onLogin, onRegisterClick }) => {
         email: prev.email,
       }));
       setErrors((prev) => ({ ...prev, email: "Invalid email or password" }));
-    } finally {
-      setIsLoading(false);
     }
   };
 

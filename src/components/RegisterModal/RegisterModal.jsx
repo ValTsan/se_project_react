@@ -7,6 +7,7 @@ const RegisterModal = ({
   onRegister,
   isOpen,
   onLoginClick,
+  isLoading,
 }) => {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -104,7 +105,7 @@ const RegisterModal = ({
   return (
     <ModalWithForm
       title="Register"
-      buttonText="Next"
+      buttonText={isLoading ? "Registering..." : "Next"}
       handleCloseClick={handleCloseClick}
       isOpen={isOpen}
       onSubmit={handleRegisterSubmit}
