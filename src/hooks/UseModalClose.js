@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-function UseModalClose(isOpen, onClose) {
+function useModalClose(isOpen, onClose) {
   useEffect(() => {
     if (!isOpen) return;
 
@@ -29,4 +29,4 @@ function UseModalClose(isOpen, onClose) {
   }, [isOpen, onClose]);
 }
 
-export default UseModalClose;
+export default useModalClose;

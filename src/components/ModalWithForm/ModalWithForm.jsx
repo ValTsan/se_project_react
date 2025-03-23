@@ -1,5 +1,5 @@
 import "./ModalWithForm.css";
-import UseModalClose from "../../Hooks/useModalClose";
+import useModalClose from "../../hooks/useModalClose";
 
 function ModalWithForm({
   children,
@@ -12,7 +12,7 @@ function ModalWithForm({
   isFormValid = true,
   additionalButtons,
 }) {
-  UseModalClose(isOpen, handleCloseClick);
+  useModalClose(isOpen, handleCloseClick);
 
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>

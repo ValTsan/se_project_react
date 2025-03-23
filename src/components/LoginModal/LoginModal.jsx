@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { UseFormAndValidation } from "../../Hooks/useFormAndValidation";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 const LoginModal = ({
   isOpen,
@@ -19,7 +19,7 @@ const LoginModal = ({
     setIsValid,
     setValues,
     setErrors,
-  } = UseFormAndValidation();
+  } = useFormAndValidation();
 
   const validateEmail = (email) => {
     return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);

@@ -1,10 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { UseForm } from "../../Hooks/useForm";
+import { useForm } from "../../hooks/useForm";
 
 const AddItemModal = ({ handleCloseClick, onAddItem, isOpen, isLoading }) => {
-  const { values, handleChange, setValues } = UseForm({
+  const { values, handleChange, setValues } = useForm({
     name: "",
     imageUrl: "",
     weather: "",
@@ -91,9 +91,6 @@ const AddItemModal = ({ handleCloseClick, onAddItem, isOpen, isLoading }) => {
           />
           Cold
         </label>
-        {/* <button type="submit" className="modal__submit" disabled={!isFormValid}>
-          Submit
-        </button> */}
       </fieldset>
     </ModalWithForm>
   );
