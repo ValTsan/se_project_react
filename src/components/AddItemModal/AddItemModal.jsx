@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { UseForm } from "../../Hooks/useForm";
 
-const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
-  const [isLoading, setIsLoading] = React.useState(false);
+const AddItemModal = ({ handleCloseClick, onAddItem, isOpen, isLoading }) => {
   const { values, handleChange, setValues } = UseForm({
     name: "",
     imageUrl: "",
@@ -13,14 +12,7 @@ const AddItemModal = ({ handleCloseClick, onAddItem, isOpen }) => {
 
   const handleAddItemSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    onAddItem(values)
-      .then(() => {
-        setValues({ name: "", imageUrl: "", weather: "" });
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    onAddItem(values);
   };
 
   useEffect(() => {

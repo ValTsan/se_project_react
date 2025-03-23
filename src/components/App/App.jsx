@@ -287,6 +287,7 @@ function App() {
               isOpen={activeModal === "add-garment"}
               handleCloseClick={closeActiveModal}
               onAddItem={handleAddItemSubmit}
+              isLoading={isLoading}
             />
           )}
           {activeModal === "add-new" && (
@@ -294,6 +295,7 @@ function App() {
               isOpen={activeModal === "add-new"}
               handleCloseClick={closeActiveModal}
               onAddItem={handleAddItemSubmit}
+              isLoading={isLoading}
             />
           )}
           {activeModal === "preview" && (
@@ -310,6 +312,7 @@ function App() {
               onRegister={handleRegister}
               handleCloseClick={closeActiveModal}
               onLoginClick={handleLoginClick}
+              isLoading={isLoading}
             />
           )}
           {activeModal === "login" && (
@@ -318,6 +321,7 @@ function App() {
               onClose={closeActiveModal}
               onLogin={handleLogin}
               onRegisterClick={handleRegisterClick}
+              isLoading={isLoading}
             />
           )}
           {activeModal === "edit-profile" && (
@@ -325,6 +329,7 @@ function App() {
               isOpen={activeModal === "edit-profile"}
               onClose={closeActiveModal}
               onUpdateUser={handleUpdateCurrentUser}
+              isLoading={isLoading}
             />
           )}
         </CurrentTemperatureUnitContext.Provider>
